@@ -1,0 +1,961 @@
+https://lambk9.github.io/Date-moi/<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une petite question…</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================
+           Variables et Configuration
+           =========================== */
+        :root {
+            --primary-color: #f5f1e8;
+            --secondary-color: #faf8f3;
+            --text-dark: #2a2520;
+            --text-light: #6b6560;
+            --gold: #d4af37;
+            --gold-light: #e8d4b0;
+            --accent: #c4a882;
+            --transition-duration: 0.6s;
+            --animation-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --blur-effect: 10px;
+        }
+
+        /* ===========================
+           Réinitialisation Globale
+           =========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ===========================
+           Conteneur Principal
+           =========================== */
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===========================
+           Écrans (Screens)
+           =========================== */
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px);
+            transition: all var(--transition-duration) var(--animation-ease);
+            text-align: center;
+        }
+
+        .screen.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .screen.exit-left {
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+
+        .screen.exit-right {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+        /* ===========================
+           Typos et Éléments Textes
+           =========================== */
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .subheading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 6vw, 3rem);
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .text-regular {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .text-elegant {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        /* ===========================
+           Boutons
+           =========================== */
+        .button {
+            padding: 1rem 2.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            background: var(--text-dark);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin: 0.5rem;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .button:hover::before {
+            left: 0;
+        }
+
+        .button:hover {
+            color: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        /* Bouton avec icône */
+        .button-with-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 1rem 2rem;
+        }
+
+        .button-choice {
+            padding: 1rem 2rem;
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .button-choice:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .button-choice.selected {
+            background: var(--text-dark);
+            color: var(--secondary-color);
+        }
+
+        /* Bouton qui s'enfuit */
+        .button-escape {
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        /* ===========================
+           Groupe de Boutons
+           =========================== */
+        .button-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* ===========================
+           Cartes Horaires
+           =========================== */
+        .time-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .time-card {
+            padding: 2rem;
+            background: var(--secondary-color);
+            border: 2px solid var(--text-dark);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .time-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .time-card:hover {
+            background: var(--gold-light);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .time-card.selected {
+            background: var(--text-dark);
+            color: var(--secondary-color);
+        }
+
+        /* ===========================
+           Questionnaire
+           =========================== */
+        .question-section {
+            max-width: 600px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .question-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* Slider */
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .slider {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            width: 24px;
+            height: 24px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .slider::-moz-range-thumb:hover {
+            width: 24px;
+            height: 24px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+
+        .slider-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gold);
+            min-width: 40px;
+            text-align: right;
+        }
+
+        /* Options Radio/Checkbox */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--secondary-color);
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: var(--gold-light);
+            border-color: var(--gold);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            cursor: pointer;
+            accent-color: var(--gold);
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        /* Champs Texte */
+        .text-input,
+        .textarea {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            background: var(--secondary-color);
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .text-input:focus,
+        .textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            background: var(--primary-color);
+        }
+
+        .textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===========================
+           Confettis
+           =========================== */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            pointer-events: none;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===========================
+           Animation Texte Lettre par Lettre
+           =========================== */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .typing-text {
+            min-height: 1.5em;
+        }
+
+        .char {
+            display: inline;
+            opacity: 0;
+            animation: fade-in-up 0.1s ease forwards;
+        }
+
+        /* ===========================
+           Animations Spéciales
+           =========================== */
+        @keyframes pulse-gold {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+            }
+        }
+
+        .pulse {
+            animation: pulse-gold 2s infinite;
+        }
+
+        /* ===========================
+           Responsive Design
+           =========================== */
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .button,
+            .button-choice {
+                width: 100%;
+            }
+
+            .time-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .question-section {
+                padding: 0 1rem;
+            }
+        }
+
+        /* ===========================
+           Animations de Transition
+           =========================== */
+        @keyframes shine {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .shimmer {
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.5),
+                transparent
+            );
+            background-size: 1000px 100%;
+            animation: shine 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Écran 1: Accueil -->
+        <div class="screen active" id="screen-welcome">
+            <h1 class="headline">J'ai une petite question<br>à te poser…</h1>
+            <button class="button" onclick="app.nextScreen()">Continuer</button>
+        </div>
+
+        <!-- Écran 2: Contexte -->
+        <div class="screen" id="screen-context">
+            <p class="text-elegant" style="opacity: 0;" id="context-text-1">
+                Après réflexion, je me suis dit qu'un simple message serait beaucoup trop banal.
+            </p>
+            <p class="text-elegant" style="opacity: 0; margin-top: 2rem;" id="context-text-2">
+                Alors j'ai fait les choses à ma façon.
+            </p>
+            <button class="button" style="margin-top: 3rem; opacity: 0;" id="context-button" onclick="app.nextScreen()">
+                Découvrir
+            </button>
+        </div>
+
+        <!-- Écran 3: Question Principale -->
+        <div class="screen" id="screen-question">
+            <div class="typing-text" id="main-question"></div>
+            <div class="button-group" style="margin-top: 3rem;">
+                <button class="button-choice" onclick="app.handleYes()">
+                    <span>❤️ Oui, avec plaisir</span>
+                </button>
+                <button class="button-choice button-escape" id="button-escape" onclick="app.handleEscape()">
+                    <span>🙈 Laisse-moi réfléchir</span>
+                </button>
+            </div>
+            <p class="text-elegant" style="opacity: 0; margin-top: 2rem;" id="escape-message">
+                …Je crois que cette réponse n'était pas vraiment prévue.
+            </p>
+        </div>
+
+        <!-- Écran 4: Réponse Positive -->
+        <div class="screen" id="screen-yes">
+            <p class="subheading" style="opacity: 0;" id="yes-message">
+                Je savais que tu avais bon goût 😉
+            </p>
+            <button class="button pulse" style="margin-top: 2rem;" onclick="app.nextScreen()">
+                Choisir notre heure
+            </button>
+        </div>
+
+        <!-- Écran 5: Choix de l'Heure -->
+        <div class="screen" id="screen-time">
+            <h2 class="subheading">Quel créneau te convient ?</h2>
+            <div class="time-cards">
+                <div class="time-card" onclick="app.selectTime(this, '18:00')">18h00</div>
+                <div class="time-card" onclick="app.selectTime(this, '19:00')">19h00</div>
+                <div class="time-card" onclick="app.selectTime(this, '20:00')">20h00</div>
+                <div class="time-card" onclick="app.selectTime(this, '22:00')">22h00</div>
+                <div class="time-card" onclick="app.selectTime(this, 'a_vie')">à vie ✨</div>
+            </div>
+            <button class="button" style="margin-top: 2rem; opacity: 0;" id="time-validate-btn" onclick="app.nextScreen()">
+                Valider
+            </button>
+        </div>
+
+        <!-- Écran 6: Questions Bonus -->
+        <div class="screen" id="screen-questions">
+            <h2 class="subheading">Petit questionnaire bonus</h2>
+            
+            <div class="question-section" style="opacity: 0;" id="question-1">
+                <label class="question-label">Quel est ton niveau d'enthousiasme ?</label>
+                <div class="slider-container">
+                    <input type="range" min="1" max="10" value="5" class="slider" id="enthusiasm-slider" oninput="document.getElementById('enthusiasm-value').textContent = this.value">
+                    <span class="slider-value" id="enthusiasm-value">5</span>
+                </div>
+            </div>
+
+            <div class="question-section" style="opacity: 0;" id="question-2">
+                <label class="question-label">Notre programme devrait plutôt être :</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="program-1" name="program" value="surprise">
+                        <label for="program-1">Surprise totale</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="program-2" name="program" value="cuddle">
+                        <label for="program-2">Câlin 🤗</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="program-3" name="program" value="cooking">
+                        <label for="program-3">Tu cuisines 🍽️</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="program-4" name="program" value="lots-of-cuddles">
+                        <label for="program-4">Câlin x 100000 🥰</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="program-5" name="program" value="trust-you">
+                        <label for="program-5">Je te fais confiance ✨</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section" style="opacity: 0;" id="question-3">
+                <label class="question-label">Une chanson qui résume ton humeur aujourd'hui ?</label>
+                <input type="text" class="text-input" id="song-input" placeholder="Ex: « Dreamers » de Fleetwood Mac">
+            </div>
+
+            <div class="question-section" style="opacity: 0;" id="question-4">
+                <label class="question-label">Un petit mot pour moi ?</label>
+                <textarea class="textarea" id="message-input" placeholder="Dis-moi tout... 😊"></textarea>
+            </div>
+
+            <button class="button" style="margin-top: 2rem; opacity: 0;" id="questions-btn" onclick="app.nextScreen()">
+                Continuer
+            </button>
+        </div>
+
+        <!-- Écran 7: Écran Final -->
+        <div class="screen" id="screen-final">
+            <p class="subheading">Merci d'avoir joué le jeu grand fou.</p>
+            <p class="text-elegant" style="margin-top: 1.5rem; opacity: 0;" id="final-text-1">
+                J'avais simplement envie de créer un moment un peu différent hehehe.
+            </p>
+            <p class="text-elegant" style="margin-top: 1.5rem; opacity: 0;" id="final-text-2">
+                J'ai hâte d'être à samedi mon tigrou.
+            </p>
+            <button class="button" style="margin-top: 2.5rem; opacity: 0;" id="final-btn" onclick="app.sendAnswers()">
+                Envoyer mes réponses
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ===========================
+        // Configuration et État Global
+        // ===========================
+        const app = {
+            currentScreen: 0,
+            escapeAttempts: 0,
+            escapeMaxAttempts: 3,
+            selectedTime: null,
+            answers: {
+                dateAccepted: false,
+                selectedTime: null,
+                enthusiasm: 5,
+                program: null,
+                song: '',
+                message: ''
+            },
+
+            // Écrans disponibles
+            screens: [
+                'screen-welcome',
+                'screen-context',
+                'screen-question',
+                'screen-yes',
+                'screen-time',
+                'screen-questions',
+                'screen-final'
+            ],
+
+            // ===========================
+            // Navigation entre les écrans
+            // ===========================
+            nextScreen() {
+                this.transitionToScreen(this.currentScreen + 1);
+            },
+
+            transitionToScreen(screenIndex) {
+                const currentScreenEl = document.getElementById(this.screens[this.currentScreen]);
+                const nextScreenEl = document.getElementById(this.screens[screenIndex]);
+
+                if (!nextScreenEl) return;
+
+                // Animation de sortie
+                currentScreenEl.classList.add('exit-left');
+                
+                setTimeout(() => {
+                    currentScreenEl.classList.remove('active', 'exit-left');
+                    this.currentScreen = screenIndex;
+                    
+                    // Animation d'entrée
+                    nextScreenEl.classList.add('active');
+                    
+                    // Déclencher les animations spécifiques à l'écran
+                    this.setupScreenAnimation(screenIndex);
+                }, 300);
+            },
+
+            // ===========================
+            // Configuration des animations d'écrans
+            // ===========================
+            setupScreenAnimation(screenIndex) {
+                switch(screenIndex) {
+                    case 1: // Écran contexte
+                        this.animateContextScreen();
+                        break;
+                    case 2: // Question principale
+                        this.animateQuestionScreen();
+                        break;
+                    case 3: // Réponse oui
+                        this.animateYesScreen();
+                        break;
+                    case 5: // Questions bonus
+                        this.animateQuestionsScreen();
+                        break;
+                    case 6: // Écran final
+                        this.animateFinalScreen();
+                        break;
+                }
+            },
+
+            // Animation écran contexte
+            animateContextScreen() {
+                const text1 = document.getElementById('context-text-1');
+                const text2 = document.getElementById('context-text-2');
+                const btn = document.getElementById('context-button');
+
+                text1.style.opacity = '0';
+                text2.style.opacity = '0';
+                btn.style.opacity = '0';
+
+                setTimeout(() => {
+                    this.fadeIn(text1, 0);
+                    this.fadeIn(text2, 1500);
+                    this.fadeIn(btn, 2500);
+                }, 100);
+            },
+
+            // Animation question principale (lettre par lettre)
+            animateQuestionScreen() {
+                const question = "Accepterais-tu de partir en rendez-vous avec moi samedi ?";
+                const questionEl = document.getElementById('main-question');
+                questionEl.innerHTML = '';
+                
+                let delay = 0;
+                for (let i = 0; i < question.length; i++) {
+                    const char = document.createElement('span');
+                    char.className = 'char';
+                    char.textContent = question[i];
+                    char.style.animationDelay = `${delay}ms`;
+                    questionEl.appendChild(char);
+                    delay += 40;
+                }
+
+                // Réinitialiser les boutons
+                this.escapeAttempts = 0;
+                document.getElementById('escape-message').style.opacity = '0';
+                document.getElementById('button-escape').style.position = 'static';
+                document.getElementById('button-escape').style.pointerEvents = 'auto';
+            },
+
+            // Animation réponse positive
+            animateYesScreen() {
+                this.answers.dateAccepted = true;
+                const message = document.getElementById('yes-message');
+                message.style.opacity = '0';
+                this.fadeIn(message, 0);
+                this.createConfetti();
+            },
+
+            // Animation questions bonus
+            animateQuestionsScreen() {
+                const questions = [
+                    document.getElementById('question-1'),
+                    document.getElementById('question-2'),
+                    document.getElementById('question-3'),
+                    document.getElementById('question-4')
+                ];
+                const btn = document.getElementById('questions-btn');
+
+                questions.forEach((q, index) => {
+                    q.style.opacity = '0';
+                    this.fadeIn(q, index * 400);
+                });
+
+                this.fadeIn(btn, questions.length * 400 + 200);
+            },
+
+            // Animation écran final
+            animateFinalScreen() {
+                const text1 = document.getElementById('final-text-1');
+                const text2 = document.getElementById('final-text-2');
+                const btn = document.getElementById('final-btn');
+
+                text1.style.opacity = '0';
+                text2.style.opacity = '0';
+                btn.style.opacity = '0';
+
+                this.fadeIn(text1, 400);
+                this.fadeIn(text2, 1200);
+                this.fadeIn(btn, 2000);
+            },
+
+            // Fade in utilitaire
+            fadeIn(element, delay) {
+                setTimeout(() => {
+                    element.style.transition = `opacity 0.8s ${app.animateEase}`;
+                    element.style.opacity = '1';
+                }, delay);
+            },
+
+            animateEase: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+
+            // ===========================
+            // Gestion des réponses
+            // ===========================
+            handleYes() {
+                this.answers.dateAccepted = true;
+                this.transitionToScreen(3);
+            },
+
+            handleEscape() {
+                this.escapeAttempts++;
+                
+                if (this.escapeAttempts < this.escapeMaxAttempts) {
+                    // Faire s'enfuir le bouton
+                    const btn = document.getElementById('button-escape');
+                    const randomX = (Math.random() - 0.5) * 300;
+                    const randomY = (Math.random() - 0.5) * 300;
+                    
+                    btn.style.transition = 'all 0.4s ease';
+                    btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                } else {
+                    // Après 3 tentatives, afficher le message et mettre en évidence le "Oui"
+                    const escapeMsg = document.getElementById('escape-message');
+                    escapeMsg.style.opacity = '1';
+                    
+                    const escapeBtn = document.getElementById('button-escape');
+                    escapeBtn.style.pointerEvents = 'none';
+                    escapeBtn.style.opacity = '0.5';
+                    
+                    // Mettre en évidence le bouton "Oui"
+                    const yesBtn = document.querySelector('#screen-question .button-choice:first-child');
+                    yesBtn.classList.add('pulse');
+                }
+            },
+
+            selectTime(element, time) {
+                // Retirer la sélection précédente
+                document.querySelectorAll('.time-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                
+                // Ajouter la sélection
+                element.classList.add('selected');
+                this.selectedTime = time;
+                this.answers.selectedTime = time;
+                
+                // Afficher le bouton valider
+                const validateBtn = document.getElementById('time-validate-btn');
+                validateBtn.style.opacity = '1';
+            },
+
+            // ===========================
+            // Confettis élégants
+            // ===========================
+            createConfetti() {
+                const confettiCount = 50;
+                const container = document.querySelector('.container');
+                
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-10px';
+                    confetti.style.opacity = Math.random() * 0.7 + 0.3;
+                    confetti.style.background = Math.random() > 0.5 ? 'var(--gold)' : 'var(--gold-light)';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    
+                    const duration = Math.random() * 2000 + 2000;
+                    confetti.style.animation = `confetti-fall ${duration}ms linear forwards`;
+                    
+                    container.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), duration);
+                }
+            },
+
+            // ===========================
+            // Gestion du questionnaire
+            // ===========================
+            nextScreen() {
+                this.transitionToScreen(this.currentScreen + 1);
+            },
+
+            // ===========================
+            // Envoi des réponses
+            // ===========================
+            sendAnswers() {
+                // Récupérer les valeurs du questionnaire
+                this.answers.enthusiasm = document.getElementById('enthusiasm-slider').value;
+                
+                const programRadios = document.querySelectorAll('input[name="program"]:checked');
+                if (programRadios.length > 0) {
+                    this.answers.program = programRadios[0].value;
+                }
+                
+                this.answers.song = document.getElementById('song-input').value;
+                this.answers.message = document.getElementById('message-input').value;
+
+                // Afficher dans la console
+                this.displayAnswers();
+
+                // Copier dans le presse-papiers (optionnel)
+                const answersJson = JSON.stringify(this.answers, null, 2);
+                navigator.clipboard.writeText(answersJson).then(() => {
+                    alert('Réponses copiées dans le presse-papiers ! 💝');
+                }).catch(() => {
+                    console.log('Impossible de copier. Les réponses sont affichées dans la console.');
+                });
+            },
+
+            displayAnswers() {
+                console.clear();
+                console.log('%c🌹 Réponses reçues 🌹', 'font-size: 20px; font-weight: bold; color: #d4af37;');
+                console.table(this.answers);
+                console.log('%cObjet complet:', 'font-size: 14px; font-weight: bold; color: #d4af37;');
+                console.log(this.answers);
+            }
+        };
+
+        // Initialiser l'écran d'accueil
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('%c💝 Bienvenue sur cette expérience spéciale 💝', 'font-size: 16px; font-weight: bold; color: #d4af37;');
+            console.log('Les réponses seront affichées à la fin. Amuse-toi bien !');
+        });
+    </script>
+</body>
+</html>
