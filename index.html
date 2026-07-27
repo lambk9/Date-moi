@@ -10,21 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ===========================
-           Palette Cinéma Chic Luxe
+           Palette Cinéma Romantique - Rose Chic Luxe
            =========================== */
         :root {
-            --bg-primary: #faf8f5;
-            --bg-secondary: #f5f3f0;
-            --bg-dark: #e8e5e0;
-            --text-primary: #1a1815;
-            --text-secondary: #6b6560;
-            --text-light: #9a9390;
-            --gold: #d4af37;
-            --gold-dark: #aa8c2c;
-            --gold-light: #e8dcc0;
-            --gold-pale: #f4f1e8;
-            --accent: #c4a882;
-            --white-smoke: #fffcf8;
+            --bg-primary: #faf7f5;
+            --bg-secondary: #f5f1f0;
+            --bg-dark: #ede5e3;
+            --text-primary: #3d2f2d;
+            --text-secondary: #7a6865;
+            --text-light: #a89f9a;
+            --rose: #d97fa3;
+            --rose-dark: #c45a7f;
+            --rose-light: #e8b8d1;
+            --rose-pale: #f5e8f0;
+            --rose-dust: #d4a5b8;
+            --white-smoke: #fffcfa;
             
             --transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             --transition-slow: 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -101,12 +101,12 @@
         }
         
         .screen::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--gold), var(--accent));
+            background: linear-gradient(180deg, var(--rose-dust), var(--rose));
             border-radius: 4px;
         }
         
         .screen::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, var(--gold-dark), var(--gold));
+            background: linear-gradient(180deg, var(--rose-dark), var(--rose));
         }
 
         .screen.active {
@@ -131,7 +131,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(217, 127, 163, 0.1) 0%, transparent 70%);
             pointer-events: none;
             z-index: -1;
             filter: blur(60px);
@@ -150,8 +150,8 @@
             letter-spacing: -2px;
             text-transform: lowercase;
             font-style: italic;
-            text-shadow: 0 2px 20px rgba(212, 175, 55, 0.1);
-            background: linear-gradient(135deg, var(--text-primary), var(--accent));
+            text-shadow: 0 2px 20px rgba(217, 127, 163, 0.12);
+            background: linear-gradient(135deg, var(--text-primary), var(--rose-dust));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -165,8 +165,9 @@
             margin-bottom: 1.5rem;
             line-height: 1.3;
             letter-spacing: -1px;
-            text-shadow: 0 2px 15px rgba(212, 175, 55, 0.08);
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            font-style: italic;
+            text-shadow: 0 2px 15px rgba(217, 127, 163, 0.1);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--rose-dust) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -179,7 +180,7 @@
             font-weight: 300;
             line-height: 1.8;
             letter-spacing: 0.5px;
-            text-shadow: 0 1px 10px rgba(212, 175, 55, 0.05);
+            text-shadow: 0 1px 10px rgba(217, 127, 163, 0.05);
         }
 
         .text-light {
@@ -193,12 +194,13 @@
            =========================== */
         .button {
             padding: 1.2rem 3rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 0.95rem;
             font-weight: 400;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--text-primary) 0%, #2d2820 100%);
+            font-style: italic;
+            background: linear-gradient(135deg, var(--rose-dark) 0%, var(--rose) 100%);
             color: var(--white-smoke);
             border: none;
             border-radius: 2px;
@@ -207,8 +209,8 @@
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(217, 127, 163, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
         .button::before {
@@ -218,7 +220,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transition: left 0.7s ease;
         }
 
@@ -229,18 +231,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent);
+            background: linear-gradient(135deg, rgba(217, 127, 163, 0.25), transparent);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
 
         .button:hover {
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            background: linear-gradient(135deg, var(--rose-light), var(--rose-dark));
             color: var(--text-primary);
             transform: translateY(-4px);
-            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.35),
-                        0 0 40px rgba(212, 175, 55, 0.2),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(217, 127, 163, 0.4),
+                        0 0 40px rgba(217, 127, 163, 0.25),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
             letter-spacing: 2.5px;
         }
 
@@ -258,22 +260,23 @@
 
         .button-choice {
             padding: 1.2rem 2.2rem;
-            background: linear-gradient(135deg, var(--white-smoke), var(--bg-primary));
+            background: linear-gradient(135deg, var(--white-smoke), var(--rose-pale));
             color: var(--text-primary);
-            border: 1.5px solid var(--gold-light);
+            border: 1.5px solid var(--rose-light);
             border-radius: 2px;
             cursor: pointer;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1rem;
             font-weight: 400;
+            font-style: italic;
             letter-spacing: 0.8px;
             text-transform: uppercase;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(5px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.1),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(217, 127, 163, 0.12),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .button-choice::after {
@@ -283,17 +286,17 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(217, 127, 163, 0.25), transparent);
             transition: left 0.7s ease;
         }
 
         .button-choice:hover {
-            border-color: var(--gold);
-            background: linear-gradient(135deg, var(--gold-pale), var(--white-smoke));
+            border-color: var(--rose);
+            background: linear-gradient(135deg, var(--rose-pale), var(--white-smoke));
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2),
-                        0 0 30px rgba(212, 175, 55, 0.15),
-                        inset 0 0 20px rgba(212, 175, 55, 0.08);
+            box-shadow: 0 20px 40px rgba(217, 127, 163, 0.25),
+                        0 0 30px rgba(217, 127, 163, 0.18),
+                        inset 0 0 20px rgba(217, 127, 163, 0.12);
         }
 
         .button-choice:hover::after {
@@ -301,11 +304,11 @@
         }
 
         .button-choice.selected {
-            background: linear-gradient(135deg, var(--text-primary), #2d2820);
+            background: linear-gradient(135deg, var(--rose-dark), var(--rose));
             color: var(--white-smoke);
-            border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3),
-                        0 0 50px rgba(212, 175, 55, 0.15);
+            border-color: var(--rose-light);
+            box-shadow: 0 20px 40px rgba(217, 127, 163, 0.35),
+                        0 0 50px rgba(217, 127, 163, 0.2);
         }
 
         /* Bouton qui s'enfuit */
@@ -328,20 +331,21 @@
 
         .time-card {
             padding: 2.5rem 2rem;
-            background: linear-gradient(135deg, var(--white-smoke) 0%, var(--bg-primary) 100%);
-            border: 1.5px solid var(--gold-light);
+            background: linear-gradient(135deg, var(--white-smoke) 0%, var(--rose-pale) 100%);
+            border: 1.5px solid var(--rose-light);
             border-radius: 2px;
             cursor: pointer;
             font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.4rem;
             font-weight: 400;
+            font-style: italic;
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             color: var(--text-primary);
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(8px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.12),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(217, 127, 163, 0.15),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .time-card::before {
@@ -351,7 +355,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(217, 127, 163, 0.35), transparent);
             transition: left 0.8s ease;
         }
 
@@ -359,19 +363,19 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(217, 127, 163, 0.08) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.4s ease;
             pointer-events: none;
         }
 
         .time-card:hover {
-            border-color: var(--gold);
-            background: linear-gradient(135deg, var(--gold-pale), var(--white-smoke));
+            border-color: var(--rose);
+            background: linear-gradient(135deg, var(--rose-pale), var(--white-smoke));
             transform: translateY(-6px);
-            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.25),
-                        0 0 40px rgba(212, 175, 55, 0.15),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            box-shadow: 0 30px 60px rgba(217, 127, 163, 0.3),
+                        0 0 40px rgba(217, 127, 163, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6);
         }
 
         .time-card:hover::before {
@@ -383,11 +387,11 @@
         }
 
         .time-card.selected {
-            background: linear-gradient(135deg, var(--text-primary), #2d2820);
+            background: linear-gradient(135deg, var(--rose-dark), var(--rose));
             color: var(--white-smoke);
-            border-color: var(--gold);
-            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.35),
-                        0 0 60px rgba(212, 175, 55, 0.2);
+            border-color: var(--rose-light);
+            box-shadow: 0 30px 60px rgba(217, 127, 163, 0.4),
+                        0 0 60px rgba(217, 127, 163, 0.25);
         }
 
         /* ===========================
@@ -423,7 +427,7 @@
             width: 100%;
             height: 3px;
             border-radius: 2px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
+            background: linear-gradient(90deg, var(--rose-dust) 0%, var(--rose) 100%);
             outline: none;
             -webkit-appearance: none;
             appearance: none;
@@ -432,7 +436,7 @@
 
         .slider:hover {
             height: 4px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 20px rgba(217, 127, 163, 0.4);
         }
 
         .slider::-webkit-slider-thumb {
@@ -441,46 +445,47 @@
             width: 22px;
             height: 22px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            background: linear-gradient(135deg, var(--rose), var(--rose-dark));
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
-            border: 1px solid var(--gold-dark);
+            box-shadow: 0 4px 15px rgba(217, 127, 163, 0.4);
+            border: 1px solid var(--rose-dark);
         }
 
         .slider::-webkit-slider-thumb:hover {
             width: 28px;
             height: 28px;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
+            box-shadow: 0 8px 25px rgba(217, 127, 163, 0.5);
         }
 
         .slider::-moz-range-thumb {
             width: 22px;
             height: 22px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            background: linear-gradient(135deg, var(--rose), var(--rose-dark));
             cursor: pointer;
-            border: 1px solid var(--gold-dark);
+            border: 1px solid var(--rose-dark);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            box-shadow: 0 4px 15px rgba(217, 127, 163, 0.4);
         }
 
         .slider::-moz-range-thumb:hover {
             width: 28px;
             height: 28px;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
+            box-shadow: 0 8px 25px rgba(217, 127, 163, 0.5);
         }
 
         .slider-value {
             font-size: 1.4rem;
             font-weight: 300;
-            color: var(--gold);
+            color: var(--rose);
             min-width: 50px;
             text-align: right;
             font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
         }
 
-        /* Options Radio Cinéma */
+        /* Options Radio Cinéma Rose */
         .options {
             display: flex;
             flex-direction: column;
@@ -491,15 +496,15 @@
             display: flex;
             align-items: center;
             padding: 1.3rem 1.5rem;
-            background: linear-gradient(135deg, var(--white-smoke), var(--bg-primary));
-            border: 1.5px solid var(--gold-light);
+            background: linear-gradient(135deg, var(--white-smoke), var(--rose-pale));
+            border: 1.5px solid var(--rose-light);
             border-radius: 2px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             overflow: hidden;
             position: relative;
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.08),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(217, 127, 163, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         .option::before {
@@ -509,7 +514,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(217, 127, 163, 0.2), transparent);
             transition: left 0.7s ease;
         }
 
@@ -517,18 +522,18 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center right, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle at center right, rgba(217, 127, 163, 0.1) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
         }
 
         .option:hover {
-            border-color: var(--gold);
-            background: linear-gradient(135deg, var(--gold-pale), var(--white-smoke));
+            border-color: var(--rose);
+            background: linear-gradient(135deg, var(--rose-pale), var(--white-smoke));
             transform: translateX(6px);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(217, 127, 163, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .option:hover::before {
@@ -545,14 +550,14 @@
             height: 22px;
             margin-right: 1.5rem;
             cursor: pointer;
-            accent-color: var(--gold);
+            accent-color: var(--rose);
             transition: all 0.3s ease;
         }
 
         .option input[type="radio"]:hover,
         .option input[type="checkbox"]:hover {
             transform: scale(1.15);
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+            filter: drop-shadow(0 0 8px rgba(217, 127, 163, 0.5));
         }
 
         .option label {
@@ -561,6 +566,7 @@
             font-size: 1rem;
             font-weight: 300;
             letter-spacing: 0.3px;
+            font-style: italic;
         }
 
         /* Champs Texte Premium */
@@ -571,25 +577,25 @@
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             font-weight: 300;
-            background: linear-gradient(135deg, var(--white-smoke), var(--bg-primary));
-            border: 1.5px solid var(--gold-light);
+            background: linear-gradient(135deg, var(--white-smoke), var(--rose-pale));
+            border: 1.5px solid var(--rose-light);
             border-radius: 2px;
             color: var(--text-primary);
             transition: all 0.4s ease;
             margin-top: 0.8rem;
             letter-spacing: 0.3px;
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.08),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(217, 127, 163, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         .text-input:focus,
         .textarea:focus {
             outline: none;
-            border-color: var(--gold);
-            background: linear-gradient(135deg, var(--gold-pale), var(--bg-primary));
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2),
-                        0 0 30px rgba(212, 175, 55, 0.15),
-                        inset 0 0 10px rgba(212, 175, 55, 0.1);
+            border-color: var(--rose);
+            background: linear-gradient(135deg, var(--rose-pale), var(--bg-primary));
+            box-shadow: 0 20px 40px rgba(217, 127, 163, 0.2),
+                        0 0 30px rgba(217, 127, 163, 0.15),
+                        inset 0 0 10px rgba(217, 127, 163, 0.1);
             transform: translateY(-2px);
         }
 
@@ -606,10 +612,10 @@
             position: fixed;
             width: 12px;
             height: 12px;
-            background: var(--gold);
+            background: var(--rose);
             pointer-events: none;
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 10px rgba(217, 127, 163, 0.5);
         }
 
         @keyframes confetti-fall {
@@ -654,10 +660,10 @@
 
         @keyframes pulse-premium {
             0%, 100% {
-                box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2), 0 0 0 0 rgba(212, 175, 55, 0.4);
+                box-shadow: 0 15px 35px rgba(217, 127, 163, 0.2), 0 0 0 0 rgba(217, 127, 163, 0.4);
             }
             50% {
-                box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25), 0 0 0 20px rgba(212, 175, 55, 0);
+                box-shadow: 0 15px 35px rgba(217, 127, 163, 0.25), 0 0 0 20px rgba(217, 127, 163, 0);
             }
         }
 
@@ -1061,7 +1067,7 @@
                     confetti.style.top = '-20px';
                     confetti.style.opacity = Math.random() * 0.8 + 0.2;
                     
-                    const colors = ['var(--gold)', 'var(--gold-dark)', 'var(--gold-light)'];
+                    const colors = ['var(--rose)', 'var(--rose-dark)', 'var(--rose-light)'];
                     confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
                     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
                     confetti.style.width = (Math.random() * 10 + 8) + 'px';
