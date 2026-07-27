@@ -6,22 +6,29 @@
     <title>Une petite question…</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ===========================
-           Variables et Configuration
+           Palette Cinéma Chic Luxe
            =========================== */
         :root {
-            --primary-color: #f5f1e8;
-            --secondary-color: #faf8f3;
-            --text-dark: #2a2520;
-            --text-light: #6b6560;
+            --bg-primary: #faf8f5;
+            --bg-secondary: #f5f3f0;
+            --bg-dark: #e8e5e0;
+            --text-primary: #1a1815;
+            --text-secondary: #6b6560;
+            --text-light: #9a9390;
             --gold: #d4af37;
-            --gold-light: #e8d4b0;
+            --gold-dark: #aa8c2c;
+            --gold-light: #e8dcc0;
+            --gold-pale: #f4f1e8;
             --accent: #c4a882;
-            --transition-duration: 0.6s;
-            --animation-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --blur-effect: 10px;
+            --white-smoke: #fffcf8;
+            
+            --transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-slow: 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: 0.6s ease-out;
         }
 
         /* ===========================
@@ -40,10 +47,12 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+            color: var(--text-primary);
+            letter-spacing: 0.3px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* ===========================
@@ -57,10 +66,11 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            background: radial-gradient(ellipse at center, var(--white-smoke) 0%, var(--bg-primary) 100%);
         }
 
         /* ===========================
-           Écrans (Screens)
+           Écrans - Transitions Ciné
            =========================== */
         .screen {
             position: absolute;
@@ -70,85 +80,89 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(30px);
-            transition: all var(--transition-duration) var(--animation-ease);
+            transform: translateY(60px) scale(0.95);
+            filter: blur(8px);
+            transition: all var(--transition-slow) ease-out;
+            pointer-events: none;
             text-align: center;
         }
 
         .screen.active {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            pointer-events: all;
         }
 
         .screen.exit-left {
             opacity: 0;
-            transform: translateX(-100px);
-        }
-
-        .screen.exit-right {
-            opacity: 0;
-            transform: translateX(100px);
+            transform: translateX(-100px) scale(0.9);
+            filter: blur(12px);
         }
 
         /* ===========================
-           Typos et Éléments Textes
+           Typographies Élégantes
            =========================== */
         .headline {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 8vw, 4.5rem);
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 3rem;
-            line-height: 1.2;
-            letter-spacing: -1px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 2.5rem;
+            line-height: 1.15;
+            letter-spacing: -2px;
+            text-transform: lowercase;
+            font-style: italic;
         }
 
         .subheading {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 6vw, 3rem);
-            font-weight: 500;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .text-regular {
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.8rem, 6vw, 3.2rem);
             font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+            letter-spacing: -1px;
         }
 
         .text-elegant {
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-weight: 400;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
             line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+
+        .text-light {
+            font-weight: 300;
+            color: var(--text-light);
+            font-size: 0.95rem;
         }
 
         /* ===========================
-           Boutons
+           Boutons Premium
            =========================== */
         .button {
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            background: var(--text-dark);
-            color: var(--secondary-color);
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.4s ease;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            background: var(--text-primary);
+            color: var(--white-smoke);
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
-            margin: 0.5rem;
+            backdrop-filter: blur(10px);
         }
 
         .button::before {
@@ -158,294 +172,352 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gold);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .button:hover::before {
-            left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
         }
 
         .button:hover {
-            color: var(--text-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+            background: var(--gold);
+            color: var(--text-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25),
+                        0 0 60px rgba(212, 175, 55, 0.1);
+            letter-spacing: 2px;
+        }
+
+        .button:hover::before {
+            left: 100%;
         }
 
         .button:active {
-            transform: translateY(0);
-        }
-
-        /* Bouton avec icône */
-        .button-with-icon {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
-            padding: 1rem 2rem;
+            transform: translateY(-1px);
         }
 
         .button-choice {
-            padding: 1rem 2rem;
-            background: var(--secondary-color);
-            color: var(--text-dark);
-            border: 2px solid var(--text-dark);
-            border-radius: 4px;
+            padding: 1.2rem 2.2rem;
+            background: var(--white-smoke);
+            color: var(--text-primary);
+            border: 1.5px solid var(--bg-dark);
+            border-radius: 2px;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-weight: 400;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .button-choice:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
-        }
-
-        .button-choice.selected {
-            background: var(--text-dark);
-            color: var(--secondary-color);
-        }
-
-        /* Bouton qui s'enfuit */
-        .button-escape {
-            position: absolute;
-            transition: all 0.3s ease;
-        }
-
-        /* ===========================
-           Groupe de Boutons
-           =========================== */
-        .button-group {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        /* ===========================
-           Cartes Horaires
-           =========================== */
-        .time-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-            max-width: 600px;
-            width: 100%;
-        }
-
-        .time-card {
-            padding: 2rem;
-            background: var(--secondary-color);
-            border: 2px solid var(--text-dark);
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            color: var(--text-dark);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
-        .time-card::after {
+        .button-choice::after {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
             transition: left 0.6s ease;
         }
 
+        .button-choice:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08),
+                        inset 0 0 20px rgba(212, 175, 55, 0.05);
+        }
+
+        .button-choice:hover::after {
+            left: 100%;
+        }
+
+        .button-choice.selected {
+            background: linear-gradient(135deg, var(--text-primary), #2d2820);
+            color: var(--white-smoke);
+            border-color: var(--text-primary);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Bouton qui s'enfuit */
+        .button-escape {
+            position: absolute;
+            transition: all 0.4s ease;
+        }
+
+        /* ===========================
+           Cartes Horaires Premium
+           =========================== */
+        .time-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .time-card {
+            padding: 2.5rem 2rem;
+            background: var(--white-smoke);
+            border: 1.5px solid var(--bg-dark);
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .time-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
         .time-card:hover {
-            background: var(--gold-light);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2),
+                        inset 0 0 20px rgba(212, 175, 55, 0.08);
+        }
+
+        .time-card:hover::before {
+            left: 100%;
         }
 
         .time-card.selected {
-            background: var(--text-dark);
-            color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--text-primary), #2d2820);
+            color: var(--white-smoke);
+            border-color: var(--text-primary);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
         }
 
         /* ===========================
            Questionnaire
            =========================== */
         .question-section {
-            max-width: 600px;
-            margin: 2rem 0;
+            max-width: 650px;
+            margin: 2.5rem 0;
             text-align: left;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
         .question-label {
             font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 1.8rem;
             display: block;
+            letter-spacing: 0.3px;
         }
 
-        /* Slider */
+        /* Slider Premium */
         .slider-container {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .slider {
             width: 100%;
-            height: 4px;
+            height: 3px;
             border-radius: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--gold));
+            background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
             outline: none;
             -webkit-appearance: none;
             appearance: none;
+            transition: all 0.3s ease;
+        }
+
+        .slider:hover {
+            height: 4px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
 
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
-            background: var(--gold);
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            border: 1px solid var(--gold-dark);
         }
 
         .slider::-webkit-slider-thumb:hover {
-            width: 24px;
-            height: 24px;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+            width: 28px;
+            height: 28px;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
         }
 
         .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
-            background: var(--gold);
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+            border: 1px solid var(--gold-dark);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
         }
 
         .slider::-moz-range-thumb:hover {
-            width: 24px;
-            height: 24px;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+            width: 28px;
+            height: 28px;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
         }
 
         .slider-value {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 300;
             color: var(--gold);
-            min-width: 40px;
+            min-width: 50px;
             text-align: right;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
-        /* Options Radio/Checkbox */
+        /* Options Radio */
         .options {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.2rem;
         }
 
         .option {
             display: flex;
             align-items: center;
-            padding: 1rem;
-            background: var(--secondary-color);
-            border: 2px solid var(--accent);
-            border-radius: 4px;
+            padding: 1.3rem 1.5rem;
+            background: var(--white-smoke);
+            border: 1.5px solid var(--bg-dark);
+            border-radius: 2px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
         }
 
         .option:hover {
-            background: var(--gold-light);
             border-color: var(--gold);
+            background: var(--gold-pale);
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.12);
+        }
+
+        .option:hover::before {
+            left: 100%;
         }
 
         .option input[type="radio"],
         .option input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 1rem;
+            width: 22px;
+            height: 22px;
+            margin-right: 1.5rem;
             cursor: pointer;
             accent-color: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .option input[type="radio"]:hover,
+        .option input[type="checkbox"]:hover {
+            transform: scale(1.1);
         }
 
         .option label {
             cursor: pointer;
             flex: 1;
             font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.3px;
         }
 
-        /* Champs Texte */
+        /* Champs Texte Premium */
         .text-input,
         .textarea {
             width: 100%;
-            padding: 1rem;
+            padding: 1.2rem 1.5rem;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            background: var(--secondary-color);
-            border: 2px solid var(--accent);
-            border-radius: 4px;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
+            font-weight: 300;
+            background: var(--white-smoke);
+            border: 1.5px solid var(--bg-dark);
+            border-radius: 2px;
+            color: var(--text-primary);
+            transition: all 0.4s ease;
+            margin-top: 0.8rem;
+            letter-spacing: 0.3px;
         }
 
         .text-input:focus,
         .textarea:focus {
             outline: none;
             border-color: var(--gold);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-            background: var(--primary-color);
+            background: var(--bg-primary);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.25),
+                        inset 0 0 10px rgba(212, 175, 55, 0.05);
+            transform: translateY(-2px);
         }
 
         .textarea {
-            min-height: 120px;
+            min-height: 140px;
             resize: vertical;
             font-family: 'Inter', sans-serif;
         }
 
         /* ===========================
-           Confettis
+           Confettis Luxe
            =========================== */
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: var(--gold);
             pointer-events: none;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
         }
 
         @keyframes confetti-fall {
             to {
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(100vh) rotate(720deg) scale(0.2);
                 opacity: 0;
             }
         }
 
         /* ===========================
-           Animation Texte Lettre par Lettre
+           Animations
            =========================== */
-        @keyframes fade-in-up {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -453,30 +525,47 @@
             }
         }
 
+        @keyframes typeChar {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         .typing-text {
-            min-height: 1.5em;
+            min-height: 2.5em;
         }
 
         .char {
             display: inline;
             opacity: 0;
-            animation: fade-in-up 0.1s ease forwards;
+            animation: typeChar 0.08s ease forwards;
         }
 
-        /* ===========================
-           Animations Spéciales
-           =========================== */
-        @keyframes pulse-gold {
+        @keyframes pulse-premium {
             0%, 100% {
-                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+                box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2), 0 0 0 0 rgba(212, 175, 55, 0.4);
             }
             50% {
-                box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+                box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25), 0 0 0 20px rgba(212, 175, 55, 0);
             }
         }
 
         .pulse {
-            animation: pulse-gold 2s infinite;
+            animation: pulse-premium 2.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        /* ===========================
+           Groupe de Boutons
+           =========================== */
+        .button-group {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2.5rem;
         }
 
         /* ===========================
@@ -484,12 +573,13 @@
            =========================== */
         @media (max-width: 768px) {
             .headline {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .button-group {
                 flex-direction: column;
                 width: 100%;
+                gap: 1.2rem;
             }
 
             .button,
@@ -499,35 +589,16 @@
 
             .time-cards {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
+                gap: 1.2rem;
             }
 
             .question-section {
                 padding: 0 1rem;
             }
-        }
 
-        /* ===========================
-           Animations de Transition
-           =========================== */
-        @keyframes shine {
-            0% {
-                background-position: -1000px 0;
+            .screen {
+                padding: 2rem 1.5rem;
             }
-            100% {
-                background-position: 1000px 0;
-            }
-        }
-
-        .shimmer {
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.5),
-                transparent
-            );
-            background-size: 1000px 100%;
-            animation: shine 2s infinite;
         }
     </style>
 </head>
@@ -679,7 +750,6 @@
                 message: ''
             },
 
-            // Écrans disponibles
             screens: [
                 'screen-welcome',
                 'screen-context',
@@ -691,7 +761,7 @@
             ],
 
             // ===========================
-            // Navigation entre les écrans
+            // Navigation avec animations ciné
             // ===========================
             nextScreen() {
                 this.transitionToScreen(this.currentScreen + 1);
@@ -703,94 +773,92 @@
 
                 if (!nextScreenEl) return;
 
-                // Animation de sortie
                 currentScreenEl.classList.add('exit-left');
                 
                 setTimeout(() => {
                     currentScreenEl.classList.remove('active', 'exit-left');
                     this.currentScreen = screenIndex;
-                    
-                    // Animation d'entrée
                     nextScreenEl.classList.add('active');
-                    
-                    // Déclencher les animations spécifiques à l'écran
                     this.setupScreenAnimation(screenIndex);
-                }, 300);
+                }, 400);
             },
 
             // ===========================
-            // Configuration des animations d'écrans
+            // Animations spécifiques par écran
             // ===========================
             setupScreenAnimation(screenIndex) {
                 switch(screenIndex) {
-                    case 1: // Écran contexte
+                    case 1:
                         this.animateContextScreen();
                         break;
-                    case 2: // Question principale
+                    case 2:
                         this.animateQuestionScreen();
                         break;
-                    case 3: // Réponse oui
+                    case 3:
                         this.animateYesScreen();
                         break;
-                    case 5: // Questions bonus
+                    case 5:
                         this.animateQuestionsScreen();
                         break;
-                    case 6: // Écran final
+                    case 6:
                         this.animateFinalScreen();
                         break;
                 }
             },
 
-            // Animation écran contexte
             animateContextScreen() {
                 const text1 = document.getElementById('context-text-1');
                 const text2 = document.getElementById('context-text-2');
                 const btn = document.getElementById('context-button');
 
-                text1.style.opacity = '0';
-                text2.style.opacity = '0';
-                btn.style.opacity = '0';
+                text1.style.transition = 'all 1s ease-out';
+                text2.style.transition = 'all 1s ease-out';
+                btn.style.transition = 'all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
 
                 setTimeout(() => {
-                    this.fadeIn(text1, 0);
-                    this.fadeIn(text2, 1500);
-                    this.fadeIn(btn, 2500);
+                    text1.style.opacity = '1';
                 }, 100);
+
+                setTimeout(() => {
+                    text2.style.opacity = '1';
+                }, 1600);
+
+                setTimeout(() => {
+                    btn.style.opacity = '1';
+                }, 2600);
             },
 
-            // Animation question principale (lettre par lettre)
             animateQuestionScreen() {
                 const question = "Accepterais-tu de partir en rendez-vous avec moi samedi ?";
                 const questionEl = document.getElementById('main-question');
                 questionEl.innerHTML = '';
                 
-                let delay = 0;
+                let delay = 30;
                 for (let i = 0; i < question.length; i++) {
                     const char = document.createElement('span');
                     char.className = 'char';
                     char.textContent = question[i];
                     char.style.animationDelay = `${delay}ms`;
                     questionEl.appendChild(char);
-                    delay += 40;
+                    delay += 45;
                 }
 
-                // Réinitialiser les boutons
                 this.escapeAttempts = 0;
                 document.getElementById('escape-message').style.opacity = '0';
                 document.getElementById('button-escape').style.position = 'static';
                 document.getElementById('button-escape').style.pointerEvents = 'auto';
             },
 
-            // Animation réponse positive
             animateYesScreen() {
                 this.answers.dateAccepted = true;
                 const message = document.getElementById('yes-message');
-                message.style.opacity = '0';
-                this.fadeIn(message, 0);
+                message.style.transition = 'all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 100);
                 this.createConfetti();
             },
 
-            // Animation questions bonus
             animateQuestionsScreen() {
                 const questions = [
                     document.getElementById('question-1'),
@@ -801,37 +869,30 @@
                 const btn = document.getElementById('questions-btn');
 
                 questions.forEach((q, index) => {
-                    q.style.opacity = '0';
-                    this.fadeIn(q, index * 400);
+                    q.style.setProperty('--delay', `${index * 400}ms`);
                 });
 
-                this.fadeIn(btn, questions.length * 400 + 200);
+                btn.style.opacity = '0';
+                btn.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+                setTimeout(() => {
+                    btn.style.opacity = '1';
+                }, questions.length * 400 + 300);
             },
 
-            // Animation écran final
             animateFinalScreen() {
                 const text1 = document.getElementById('final-text-1');
                 const text2 = document.getElementById('final-text-2');
                 const btn = document.getElementById('final-btn');
 
-                text1.style.opacity = '0';
-                text2.style.opacity = '0';
-                btn.style.opacity = '0';
+                text1.style.transition = 'all 1s ease-out';
+                text2.style.transition = 'all 1s ease-out';
+                btn.style.transition = 'all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
 
-                this.fadeIn(text1, 400);
-                this.fadeIn(text2, 1200);
-                this.fadeIn(btn, 2000);
+                setTimeout(() => text1.style.opacity = '1', 300);
+                setTimeout(() => text2.style.opacity = '1', 1200);
+                setTimeout(() => btn.style.opacity = '1', 2000);
             },
-
-            // Fade in utilitaire
-            fadeIn(element, delay) {
-                setTimeout(() => {
-                    element.style.transition = `opacity 0.8s ${app.animateEase}`;
-                    element.style.opacity = '1';
-                }, delay);
-            },
-
-            animateEase: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
 
             // ===========================
             // Gestion des réponses
@@ -845,81 +906,74 @@
                 this.escapeAttempts++;
                 
                 if (this.escapeAttempts < this.escapeMaxAttempts) {
-                    // Faire s'enfuir le bouton
                     const btn = document.getElementById('button-escape');
-                    const randomX = (Math.random() - 0.5) * 300;
-                    const randomY = (Math.random() - 0.5) * 300;
+                    const randomX = (Math.random() - 0.5) * 400;
+                    const randomY = (Math.random() - 0.5) * 200;
                     
-                    btn.style.transition = 'all 0.4s ease';
+                    btn.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
                     btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
                 } else {
-                    // Après 3 tentatives, afficher le message et mettre en évidence le "Oui"
                     const escapeMsg = document.getElementById('escape-message');
+                    escapeMsg.style.transition = 'all 0.8s ease-out';
                     escapeMsg.style.opacity = '1';
                     
                     const escapeBtn = document.getElementById('button-escape');
                     escapeBtn.style.pointerEvents = 'none';
-                    escapeBtn.style.opacity = '0.5';
+                    escapeBtn.style.opacity = '0.3';
                     
-                    // Mettre en évidence le bouton "Oui"
                     const yesBtn = document.querySelector('#screen-question .button-choice:first-child');
                     yesBtn.classList.add('pulse');
                 }
             },
 
             selectTime(element, time) {
-                // Retirer la sélection précédente
                 document.querySelectorAll('.time-card').forEach(card => {
                     card.classList.remove('selected');
                 });
                 
-                // Ajouter la sélection
                 element.classList.add('selected');
                 this.selectedTime = time;
                 this.answers.selectedTime = time;
                 
-                // Afficher le bouton valider
                 const validateBtn = document.getElementById('time-validate-btn');
                 validateBtn.style.opacity = '1';
             },
 
             // ===========================
-            // Confettis élégants
+            // Confettis Cinématographiques
             // ===========================
             createConfetti() {
-                const confettiCount = 50;
+                const confettiCount = 80;
                 const container = document.querySelector('.container');
                 
                 for (let i = 0; i < confettiCount; i++) {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
                     confetti.style.left = Math.random() * window.innerWidth + 'px';
-                    confetti.style.top = '-10px';
-                    confetti.style.opacity = Math.random() * 0.7 + 0.3;
-                    confetti.style.background = Math.random() > 0.5 ? 'var(--gold)' : 'var(--gold-light)';
-                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.top = '-20px';
+                    confetti.style.opacity = Math.random() * 0.8 + 0.2;
                     
-                    const duration = Math.random() * 2000 + 2000;
+                    const colors = ['var(--gold)', 'var(--gold-dark)', 'var(--gold-light)'];
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.width = (Math.random() * 10 + 8) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 8) + 'px';
+                    
+                    const duration = Math.random() * 2500 + 2500;
+                    const delay = Math.random() * 100;
                     confetti.style.animation = `confetti-fall ${duration}ms linear forwards`;
+                    confetti.style.animationDelay = delay + 'ms';
                     
                     container.appendChild(confetti);
                     
-                    setTimeout(() => confetti.remove(), duration);
+                    setTimeout(() => confetti.remove(), duration + delay);
                 }
-            },
-
-            // ===========================
-            // Gestion du questionnaire
-            // ===========================
-            nextScreen() {
-                this.transitionToScreen(this.currentScreen + 1);
             },
 
             // ===========================
             // Envoi des réponses
             // ===========================
             sendAnswers() {
-                // Récupérer les valeurs du questionnaire
                 this.answers.enthusiasm = document.getElementById('enthusiasm-slider').value;
                 
                 const programRadios = document.querySelectorAll('input[name="program"]:checked');
@@ -930,31 +984,30 @@
                 this.answers.song = document.getElementById('song-input').value;
                 this.answers.message = document.getElementById('message-input').value;
 
-                // Afficher dans la console
                 this.displayAnswers();
 
-                // Copier dans le presse-papiers (optionnel)
                 const answersJson = JSON.stringify(this.answers, null, 2);
                 navigator.clipboard.writeText(answersJson).then(() => {
                     alert('Réponses copiées dans le presse-papiers ! 💝');
                 }).catch(() => {
-                    console.log('Impossible de copier. Les réponses sont affichées dans la console.');
+                    console.log('Les réponses sont affichées dans la console.');
                 });
             },
 
             displayAnswers() {
                 console.clear();
-                console.log('%c🌹 Réponses reçues 🌹', 'font-size: 20px; font-weight: bold; color: #d4af37;');
+                console.log('%c🌹 Réponses reçues 🌹', 'font-size: 24px; font-weight: bold; color: #d4af37; text-shadow: 0 0 10px #d4af37;');
+                console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #d4af37;');
                 console.table(this.answers);
+                console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #d4af37;');
                 console.log('%cObjet complet:', 'font-size: 14px; font-weight: bold; color: #d4af37;');
                 console.log(this.answers);
             }
         };
 
-        // Initialiser l'écran d'accueil
+        // Initialisation
         window.addEventListener('DOMContentLoaded', () => {
-            console.log('%c💝 Bienvenue sur cette expérience spéciale 💝', 'font-size: 16px; font-weight: bold; color: #d4af37;');
-            console.log('Les réponses seront affichées à la fin. Amuse-toi bien !');
+            console.log('%c✨ Bienvenue sur cette expérience spéciale ✨', 'font-size: 18px; font-weight: bold; color: #d4af37;');
         });
     </script>
 </body>
